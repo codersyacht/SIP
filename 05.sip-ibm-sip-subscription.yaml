@@ -5,7 +5,7 @@ metadata:
   namespace: sip
 spec:
   channel: v1.0
-  installPlanApproval: Automatic
+  installPlanApproval: Manual
   name: ibm-sip
   source: ibm-sip-catalog
   sourceNamespace: sip
