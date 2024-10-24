@@ -1,0 +1,14 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: sip-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: sip-nfs-storage
+  nfs:
+    path: /home/admin/apps/sipshare
+    server: 9.30.246.122
+    readOnly: false

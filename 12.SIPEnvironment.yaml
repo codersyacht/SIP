@@ -1,0 +1,128 @@
+apiVersion: apps.sip.ibm.com/v1beta1
+kind: SIPEnvironment
+metadata:
+  name: sip
+  namespace: sip
+  annotations:
+   apps.sip.ibm.com/import-certificate-to-truststore: 'true'
+spec:
+  license:
+    accept: true      
+  ivService:
+    serviceGroup: dev
+  promisingService: 
+    serviceGroup: dev
+  utilityService:
+    serviceGroup: dev
+  networkPolicy:
+    podSelector:
+      matchLabels:
+        none: none
+    policyTypes:
+      - Ingress
+  apiDocsService: {} 
+  omsGateway:
+    issuerSecret: sip-jwt-secret
+    workerPoolSize: 100
+    logLevel: INFO
+    replicas: 1
+    webClient:
+      connectTimeout: 2000
+      keepAlive: true
+      keepAliveTimeout: 60
+      logActivity: false
+      maxPoolSize: 15
+      requestTimeout: 5000
+      trustAll: false
+      verifyHost: true
+    cors:
+      enabled: true
+      allowedOrigins: '*'
+      deltaHeaders: ''
+      deltaMethods: ''
+      exposedHeaders: ''
+      allowCredentials: true
+
+  externalServices:
+    configuration:
+      ssl_cassandra_disable: 'true'
+    cassandra:
+      contactPoints: '9.30.118.99:9042'
+      keyspace: ks_inventory_visibility
+    elasticSearch:
+      createDevInstance: {}
+    kafka:
+      createDevInstance: {}
+      topicPrefix: sip
+  common:
+    ingress:
+      host: minikube
+      ssl:
+        enabled: true
+        identitySecretName: ingress-cert
+  upgradeStrategy: RollingUpdate
+  secret: sip-secret
+  serviceAccount: default
+  
+  image:
+    pullPolicy: Always
+
+    repository: registry.access.redhat.com
+    imagePullSecrets:
+     - name: ibm-entitlement-key
+
+    ivService:
+      appImageName: sip-iv-appserver
+      backendImageName: sip-iv-backend
+      onboardImageName: sip-iv-onboard
+      pullPolicy: IfNotPresent
+      tag: 10.0.2403.0-amd64
+      repository: cp.icr.io/cp/ibm-oms-enterprise
+
+    omsGateway:
+      imageName: oms-gateway
+      pullPolicy: IfNotPresent
+      tag: 10.0.2403.0-amd64
+      repository: cp.icr.io/cp/ibm-oms-enterprise
+    promisingService:
+      imageName: sip-promising
+      pullPolicy: IfNotPresent
+      tag: 10.0.2403.0-amd64
+      repository: cp.icr.io/cp/ibm-oms-enterprise
+    utilityService:
+      pullPolicy: IfNotPresent
+      repository: cp.icr.io/cp/ibm-oms-enterprise
+      audit:
+        imageName: sip-iv-audit
+        onboardImageName: sip-iv-audit-onboard
+        tag: 10.0.2403.0-amd64
+      carrier:
+        imageName: sip-carrier
+        onboardImageName: sip-carrier-onboard
+        tag: 10.0.2403.0-amd64
+      catalog:
+        imageName: sip-catalog
+        onboardImageName: sip-catalog-onboard
+        tag: 10.0.2403.0-amd64
+      logstash:
+        imageName: sip-logstash
+        tag: 10.0.2403.0-amd64
+      rules:
+        imageName: sip-rules
+        onboardImageName: sip-rules-onboard
+        tag: 10.0.2403.0-amd64
+      search:
+        imageName: sip-search
+        onboardImageName: sip-search-onboard
+        tag: 10.0.2403.0-amd64
+    apiDocsService:
+      tag: 10.0.2403.0-amd64
+      imageName: sip-api-docs
+      repository: cp.icr.io/cp/ibm-oms-enterprise
+      pullPolicy: IfNotPresent
+  storage:
+    accessMode: ReadWriteMany
+    capacity: 10Gi
+    name: sip-pv
+    storageClassName: sip-nfs-storage
+

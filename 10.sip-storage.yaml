@@ -1,0 +1,13 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: sip-nfs-storage
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: 9.30.118.99
+  share: /home/admin/apps/sipshare
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+mountOptions:
+  - hard
+  - nfsvers=4.1

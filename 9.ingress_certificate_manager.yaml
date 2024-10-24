@@ -1,0 +1,8 @@
+apiVersion: apps.oms.gateway.ibm.com/v1beta1
+kind: CertificateManager
+metadata:
+  name: ingress-cert
+  namespace: sip
+spec:
+  expiryDays: 365
+  hostName: sipservice-sip.minikube

@@ -1,0 +1,14 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-oms-gateway-catalog
+  namespace: sip
+spec:
+  displayName: IBM OMS Gateway Operator Catalog
+  # For the image name, see the following catalog source image names table and use the appropriate value.
+  image: cp.icr.io/cpopen/ibm-oms-gateway-operator-catalog:v1.0
+  publisher: IBM
+  sourceType: grpc 
+  updateStrategy:
+    registryPoll:
+      interval: 10m0s

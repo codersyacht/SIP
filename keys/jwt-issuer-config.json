@@ -1,0 +1,15 @@
+{
+   "jwtConfiguration":[
+      {
+         "iss":"oms",
+         "keys":[
+            {
+               "jwtAlgo":"RS256",
+               "publicKey":"-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn1nttzUGNiq0iLKpuc8i\n1vJ4p6Mm0MPjUNlAuEdhxWUwhUwRQ7KBVbMsos/AhuPB0iS+Igyknp5oMKb2VaQa\nnPn13jfMGNy94eor1vMBtxRbKI5uOkUq0uTmyJ/4ysFgsjnmElU1WhYw3QWzI7vn\nIuK97TUQgjLVc6LhZmRb6TYfjejyHdaP4NrjlqQIBqk4gcDbGJpy4zFWZuOrlr0B\nqzv9fEx44O199xjWw3X9B7d1D7eakcpFtgXwA2huLuMDmgP8hc2+chDJaJRi+Zwg\nKBFeiX5bNutszDuYOPpc+viYbeaRmQEdGAa+uAJAeTZ9nG+own+VpH2sLccH9IDR\nQwIDAQAB\n-----END PUBLIC KEY-----",
+               "kid":"oms"
+            }
+         ]
+      }
+   ]
+}
+
