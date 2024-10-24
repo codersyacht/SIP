@@ -5,7 +5,7 @@ metadata:
   namespace: sip
 spec:
   channel: v1.0
-  installPlanApproval: Automatic
+  installPlanApproval: Manual
   name: ibm-oms-gateway
   source: ibm-oms-gateway-catalog
   sourceNamespace: sip
