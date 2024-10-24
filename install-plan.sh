@@ -1,2 +1,3 @@
 #!/bin/bash
-kubectl patch installplan ${0} -n sip --type merge --patch '{"spec":{"approved":true}}'
+echo "Installing " ${1}
+kubectl patch installplan ${1} -n sip --type merge --patch '{"spec":{"approved":true}}'
